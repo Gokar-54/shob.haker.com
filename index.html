@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر اليوزرات المميزة - حسابات انستقرام للبيع</title>
+    <title>متجر الخدمات الرقمية - بروكسي, حسابات, شدات ببجي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -22,6 +22,9 @@
             --light: #f8f9fa;
             --success: #28a745;
             --warning: #ffc107;
+            --instagram: #E1306C;
+            --tiktok: #000000;
+            --pubg: #FF8C00;
         }
         
         body {
@@ -96,6 +99,35 @@
             color: #a5b4fc;
         }
         
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .category-tab {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 50px;
+            color: #a5b4fc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(64, 93, 230, 0.4);
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-3px);
+        }
+        
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -121,15 +153,19 @@
         .product-header {
             padding: 20px;
             text-align: center;
-            background: rgba(64, 93, 230, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .product-icon {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            color: #4cc9f0;
         }
+        
+        .proxy-icon { color: #4cc9f0; }
+        .instagram-icon { color: var(--instagram); }
+        .tiktok-icon { color: var(--tiktok); }
+        .pubg-icon { color: var(--pubg); }
+        .website-icon { color: #28a745; }
         
         .product-title {
             font-size: 1.3rem;
@@ -382,14 +418,18 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .category-tabs {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 class="logo">InstaPremium</h1>
-            <p class="tagline">أفضل اليوزرات المميزة وحسابات انستقرام للبيع بأفضل الأسعار</p>
+            <h1 class="logo">DigitalStore</h1>
+            <p class="tagline">أفضل الخدمات الرقمية - بروكسي, حسابات, شدات ببجي, ومواقع ويب</p>
             
             <div class="stats">
                 <div class="stat">
@@ -406,6 +446,15 @@
                 </div>
             </div>
         </header>
+        
+        <div class="category-tabs">
+            <button class="category-tab active" data-category="all">جميع الخدمات</button>
+            <button class="category-tab" data-category="proxy">خدمات البروكسي</button>
+            <button class="category-tab" data-category="instagram">حسابات انستقرام</button>
+            <button class="category-tab" data-category="tiktok">تيك توك</button>
+            <button class="category-tab" data-category="pubg">شدات ببجي</button>
+            <button class="category-tab" data-category="website">مواقع ويب</button>
+        </div>
         
         <section class="products-grid" id="productsGrid">
             <!-- سيتم ملء المنتجات بواسطة JavaScript -->
@@ -430,7 +479,7 @@
                         <i class="fab fa-bitcoin"></i>
                     </div>
                     <h3>USDT</h3>
-                    <p>الدفع بعملة USDT,trc20</p>
+                    <p>الدفع بعملة USDT</p>
                     <div class="payment-details">
                         TFpW3DHiTgUR7TvKxnKdQatHhV2zjmUSXR
                     </div>
@@ -477,7 +526,7 @@
                     <select id="paymentMethod" required>
                         <option value="">اختر طريقة الدفع</option>
                         <option value="شام كاش">شام كاش</option>
-                        <option value="USDT,TRC20">USDT</option>
+                        <option value="USDT">USDT</option>
                     </select>
                 </div>
                 
@@ -502,9 +551,10 @@
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-telegram"></i></a>
                 <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
             </div>
-            <p>InstaPremium &copy; 2023 - جميع الحقوق محفوظة</p>
-            <p>نقدم أفضل اليوزرات المميزة وحسابات انستقرام للبيع</p>
+            <p>DigitalStore &copy; 2023 - جميع الحقوق محفوظة</p>
+            <p>نقدم أفضل الخدمات الرقمية بأسعار تنافسية</p>
         </footer>
         
         <div class="notification" id="notification">
@@ -518,63 +568,116 @@
             const products = [
                 {
                     id: 1,
+                    title: "خدمة بروكسي شهرية",
+                    description: "خدمة بروكسي سريعة ومستقرة لمدة شهر كامل",
+                    price: 5,
+                    category: "proxy",
+                    features: [
+                        "سرعة عالية واستقرار",
+                        "دعم لكافة الاستخدامات",
+                        "تجديد تلقائي",
+                        "دعم فني 24/7"
+                    ],
+                    icon: "fas fa-shield-alt proxy-icon"
+                },
+                {
+                    id: 2,
                     title: "حساب انستقرام مميز",
                     description: "حساب انستقرام جاهز مع متابعين ونشاط عالي",
                     price: 5,
+                    category: "instagram",
                     features: [
                         "متابعين حقيقيين",
                         "نشاط عالي",
                         "ضمان لمدة 7 أيام",
                         "تسليم فوري"
                     ],
-                    icon: "fas fa-user-check"
+                    icon: "fab fa-instagram instagram-icon"
                 },
                 {
-                    id: 2,
+                    id: 3,
                     title: "يوزر انستقرام ثلاثي",
                     description: "يوزر انستقرام ثلاثي مميز ونادر",
                     price: 10,
+                    category: "instagram",
                     features: [
                         "يوزر ثلاثي نادر",
                         "سهل النطق والحفظ",
                         "مناسب للعلامات التجارية",
                         "تسليم فوري بعد الدفع"
                     ],
-                    icon: "fas fa-at"
-                },
-                {
-                    id: 3,
-                    title: "يوزر انستقرام رباعي",
-                    description: "يوزر انستقرام رباعي مميز وجذاب",
-                    price: 7,
-                    features: [
-                        "يوزر رباعي مميز",
-                        "معنى واضح وجذاب",
-                        "مناسب للمشاهير",
-                        "تسليم فوري"
-                    ],
-                    icon: "fas fa-hashtag"
+                    icon: "fas fa-at instagram-icon"
                 },
                 {
                     id: 4,
+                    title: "حساب تيك توك مميز",
+                    description: "حساب تيك توك جاهز مع متابعين",
+                    price: 5,
+                    category: "tiktok",
+                    features: [
+                        "متابعين نشطين",
+                        "محتوى مميز",
+                        "ضمان استبدال",
+                        "تسليم خلال ساعة"
+                    ],
+                    icon: "fab fa-tiktok tiktok-icon"
+                },
+                {
+                    id: 5,
+                    title: "يوزر تيك توك مميز",
+                    description: "يوزر تيك توك نادر وجذاب",
+                    price: 10,
+                    category: "tiktok",
+                    features: [
+                        "يوزر نادر وجذاب",
+                        "مناسب للمشاهير",
+                        "حجز لمدة 24 ساعة",
+                        "تسليم فوري"
+                    ],
+                    icon: "fas fa-user-tag tiktok-icon"
+                },
+                {
+                    id: 6,
+                    title: "60 UC شدات ببجي",
+                    description: "شحن 60 UC للعبة ببجي موبايل",
+                    price: 0.5,
+                    category: "pubg",
+                    features: [
+                        "شحن سريع وآمن",
+                        "دعم لكافة السيرفرات",
+                        "شحن خلال 15 دقيقة",
+                        "ضمان استرجاع"
+                    ],
+                    icon: "fas fa-gamepad pubg-icon"
+                },
+                {
+                    id: 7,
+                    title: "إنشاء موقع ويب",
+                    description: "تصميم وتطوير موقع ويب احترافي",
+                    price: 25,
+                    category: "website",
+                    features: [
+                        "تصميم احترافي متجاوب",
+                        "استضافة لمدة سنة",
+                        "اسم نطاق مجاني",
+                        "دعم فني لمدة 3 أشهر"
+                    ],
+                    icon: "fas fa-code website-icon"
+                },
+                {
+                    id: 8,
                     title: "باقة اليوزرات المميزة",
                     description: "مجموعة من اليوزرات المميزة بأسعار تنافسية",
                     price: 25,
+                    category: "instagram",
                     features: [
                         "5 يوزرات ثلاثية ورباعية",
                         "أسعار مميزة للكميات",
                         "تشكيلة متنوعة",
                         "ضمان الاستبدال"
                     ],
-                    icon: "fas fa-gem"
+                    icon: "fas fa-gem instagram-icon"
                 }
-            ];
-            
-            // بيانات اليوزرات المميزة
-            const premiumUsernames = [
-                "Bae", "Shy", "Pup", "Own", "Odd", "Lax", "Hit", "Pac", "Its", "Ear",
-                "Tat", "Tee", "Job", "Hem", "Cry", "Dot", "Vie", "Yea", "Son", "Lei",
-                "Jem", "Elf", "Eon", "Sip", "Yok", "Fax", "Pie", "Kef", "Gum", "Itz"
             ];
             
             // عناصر DOM
@@ -588,9 +691,11 @@
             const notification = document.getElementById('notification');
             const totalProducts = document.getElementById('totalProducts');
             const totalOrders = document.getElementById('totalOrders');
+            const categoryTabs = document.querySelectorAll('.category-tab');
             
             // عربة التسوق
             let cart = [];
+            let currentCategory = 'all';
             
             // تهيئة التطبيق
             function init() {
@@ -608,13 +713,27 @@
                     e.preventDefault();
                     submitOrder();
                 });
+                
+                // أحداث تبويبات الفئات
+                categoryTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        categoryTabs.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        currentCategory = this.getAttribute('data-category');
+                        displayProducts();
+                    });
+                });
             }
             
             // عرض المنتجات
             function displayProducts() {
                 productsGrid.innerHTML = '';
                 
-                products.forEach(product => {
+                const filteredProducts = currentCategory === 'all' 
+                    ? products 
+                    : products.filter(product => product.category === currentCategory);
+                
+                filteredProducts.forEach(product => {
                     const productCard = document.createElement('div');
                     productCard.className = 'product-card';
                     
@@ -663,7 +782,8 @@
                             id: product.id,
                             title: product.title,
                             price: product.price,
-                            quantity: 1
+                            quantity: 1,
+                            category: product.category
                         });
                     }
                     
@@ -710,7 +830,7 @@
                         cartItems.appendChild(cartItem);
                     });
                     
-                    totalAmount.textContent = total;
+                    totalAmount.textContent = total.toFixed(2);
                     cartTotal.style.display = 'block';
                     checkoutBtn.style.display = 'block';
                     
@@ -752,7 +872,7 @@
                 totalProducts.textContent = products.length;
                 
                 // محاكاة عدد الطلبات (في التطبيق الحقيقي، سيتم جلب هذه البيانات من قاعدة البيانات)
-                const savedOrders = JSON.parse(localStorage.getItem('instaPremiumOrders')) || [];
+                const savedOrders = JSON.parse(localStorage.getItem('digitalStoreOrders')) || [];
                 totalOrders.textContent = savedOrders.length;
             }
             
@@ -789,9 +909,9 @@
                 };
                 
                 // حفظ الطلب في localStorage
-                const savedOrders = JSON.parse(localStorage.getItem('instaPremiumOrders')) || [];
+                const savedOrders = JSON.parse(localStorage.getItem('digitalStoreOrders')) || [];
                 savedOrders.push(order);
-                localStorage.setItem('instaPremiumOrders', JSON.stringify(savedOrders));
+                localStorage.setItem('digitalStoreOrders', JSON.stringify(savedOrders));
                 
                 showNotification('تم تقديم طلبك بنجاح! رقم الطلب: ' + order.id);
                 
@@ -805,7 +925,7 @@
             
             // توليد رقم طلب عشوائي
             function generateOrderId() {
-                return 'ORD' + Date.now().toString().substr(-6);
+                return 'DIG' + Date.now().toString().substr(-6);
             }
             
             // بدء التطبيق
