@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ببجي ستور - خدمات الببجي ووسائل التواصل الاجتماعي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a00e0;
+            --secondary: #8e2de2;
+            --accent: #ff6b6b;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--accent);
+            margin-left: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(142, 45, 226, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(26, 26, 46, 0.8);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .services {
+            padding: 100px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'الأفضل';
+            position: absolute;
+            top: 20px;
+            left: -30px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(-45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin: 25px 0;
+            text-align: right;
+        }
+        
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .features-list li i {
+            color: var(--success);
+            margin-left: 10px;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: -50px;
+            width: 100px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(74, 0, 224, 0.3);
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        /* Payment Section */
+        .payment {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-5px);
+        }
+        
+        .payment-method i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .wallet-address {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 70px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-right: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .steps {
+                gap: 40px;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Order Form Styles */
+        .order-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            background-size: 16px;
+            padding-left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    ببجي ستور
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#pricing">الباقات</a></li>
+                    <li><a href="#how-it-works">كيفية الطلب</a></li>
+                    <li><a href="#payment">الدفع</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">تسجيل الدخول</a>
+                    <a href="#" class="btn btn-primary">إنشاء حساب</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>أفضل خدمات الببجي ووسائل التواصل الاجتماعي</h1>
+                <p>احصل على جميع خدمات الببجي من شدات وبطاقات، وخدمات وسائل التواصل الاجتماعي من متابعين وإعجابات بأفضل الأسعار وأسرع خدمة</p>
+                <a href="#services" class="btn btn-primary">استعرض الخدمات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>خدماتنا</h2>
+                <p>نوفر مجموعة واسعة من الخدمات الرقمية لتلبية جميع احتياجاتك</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>شدات ببجي</h3>
+                    <p>جميع أحجام الكروت المتاحة للببجي مع ضمان الجودة والسرعة في التوصيل</p>
+                    <a href="#" class="btn btn-outline">اطلب الآن</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>متابعين تيك توك</h3>
+                    <p>حسابات تيك توك من 1000 متابع حتى 10000 متابع مع ضمان الجودة والاستمرارية</p>
+                    <a href="#" class="btn btn-outline">اطلب الآن</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>رشق إنستجرام</h3>
+                    <p>خدمات رشق إنستجرام متابعين، لايكات، ومشاهدات لتطوير حسابك بسرعة</p>
+                    <a href="#" class="btn btn-outline">اطلب الآن</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3>خدمات يوتيوب</h3>
+                    <p>مشتركين، مشاهدات، لايكات، وتعليقات لتطوير قناتك على يوتيوب</p>
+                    <a href="#" class="btn btn-outline">اطلب الآن</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>تصميم مواقع</h3>
+                    <p>تصميم مواقع ويب احترافية متجاوبة مع جميع الأجهزة وبأحدث التقنيات</p>
+                    <a href="#" class="btn btn-outline">اطلب الآن</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>خدمات فيزا</h3>
+                    <p>ربط فيزا، شحن 10 بـ 5، 50 بـ 25، وخدمات فيزا أخرى متنوعة</p>
+                    <a href="#" class="btn btn-outline">اطلب الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>باقات الأسعار</h2>
+                <p>اختر الباقة المناسبة لاحتياجاتك من بين مجموعة متنوعة من الخيارات</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>باقة المبتدئين</h3>
+                    <div class="price">$10 <span>/ خدمة</span></div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> شدات ببجي صغيرة</li>
+                        <li><i class="fas fa-check"></i> 1000 متابع تيك توك</li>
+                        <li><i class="fas fa-check"></i> 500 لايك إنستجرام</li>
+                        <li><i class="fas fa-times"></i> خدمات يوتيوب</li>
+                        <li><i class="fas fa-times"></i> تصميم مواقع</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">اختر الباقة</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>الباقة المتوسطة</h3>
+                    <div class="price">$25 <span>/ خدمة</span></div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> شدات ببجي متوسطة</li>
+                        <li><i class="fas fa-check"></i> 5000 متابع تيك توك</li>
+                        <li><i class="fas fa-check"></i> 2500 لايك إنستجرام</li>
+                        <li><i class="fas fa-check"></i> 1000 مشترك يوتيوب</li>
+                        <li><i class="fas fa-times"></i> تصميم مواقع</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">اختر الباقة</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>الباقة الاحترافية</h3>
+                    <div class="price">$50 <span>/ خدمة</span></div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> شدات ببجي كبيرة</li>
+                        <li><i class="fas fa-check"></i> 10000 متابع تيك توك</li>
+                        <li><i class="fas fa-check"></i> 5000 لايك إنستجرام</li>
+                        <li><i class="fas fa-check"></i> 5000 مشترك يوتيوب</li>
+                        <li><i class="fas fa-check"></i> تصميم موقع أساسي</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">اختر الباقة</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>كيفية الطلب</h2>
+                <p>خطوات بسيطة للحصول على خدماتنا بسهولة وسرعة</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>اختر الخدمة</h3>
+                    <p>اختر الخدمة التي تريدها من بين خدماتنا المتنوعة</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>أدخل بريدك الإلكتروني</h3>
+                    <p>أدخل بريدك الإلكتروني ليصلك تأكيد الطلب والخدمة</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>ادفع عبر USDT</h3>
+                    <p>ادفع قيمة الخدمة باستخدام USDT TRC20</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>استلم الخدمة</h3>
+                    <p>ستصلك الخدمة على بريدك الإلكتروني في أسرع وقت</p>
+                </div>
+            </div>
+            
+            <!-- Order Form -->
+            <div class="order-form">
+                <h3 style="text-align: center; margin-bottom: 30px;">طلب خدمة جديدة</h3>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="service">اختر الخدمة:</label>
+                        <select class="form-control form-select" id="service" required>
+                            <option value="">-- اختر الخدمة --</option>
+                            <option value="pubg-cards">شدات ببجي</option>
+                            <option value="tiktok-followers">متابعين تيك توك</option>
+                            <option value="instagram-likes">لايكات إنستجرام</option>
+                            <option value="youtube-subscribers">مشتركين يوتيوب</option>
+                            <option value="web-design">تصميم مواقع</option>
+                            <option value="visa-services">خدمات فيزا</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني:</label>
+                        <input type="email" class="form-control" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">تفاصيل إضافية (اختياري):</label>
+                        <textarea class="form-control" id="details" rows="3" placeholder="أضف أي تفاصيل إضافية عن طلبك"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">تقديم الطلب</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="payment" id="payment">
+        <div class="container">
+            <div class="section-title">
+                <h2>طرق الدفع</h2>
+                <p>نقبل الدفع باستخدام USDT TRC20 فقط</p>
+            </div>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <i class="fab fa-usd"></i>
+                    <h3>USDT TRC20</h3>
+                    <p>الطريقة الوحيدة للدفع</p>
+                </div>
+            </div>
+            <div class="wallet-address">
+                <p>عنوان المحفظة:</p>
+                <p id="wallet">TAtiswGqawwSPjZoPiP3ezmstDW98nanwy</p>
+                <button class="btn btn-outline" onclick="copyWallet()">نسخ العنوان</button>
+            </div>
+            <p>بعد إتمام الدفع، يرجى إرسال إشعار الدفع إلى البوت على تلجرام لتأكيد طلبك</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ببجي ستور</h3>
+                    <p>أفضل منصة لخدمات الببجي ووسائل التواصل الاجتماعي في العالم العربي. نقدم خدمات عالية الجودة بأسعار منافسة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#pricing">الباقات</a></li>
+                        <li><a href="#how-it-works">كيفية الطلب</a></li>
+                        <li><a href="#payment">الدفع</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>خدماتنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">شدات ببجي</a></li>
+                        <li><a href="#">متابعين تيك توك</a></li>
+                        <li><a href="#">رشق إنستجرام</a></li>
+                        <li><a href="#">خدمات يوتيوب</a></li>
+                        <li><a href="#">تصميم مواقع</a></li>
+                        <li><a href="#">خدمات فيزا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> info@pubgstore.com</li>
+                        <li><i class="fab fa-telegram"></i> @pubgstore_bot</li>
+                        <li><i class="fab fa-whatsapp"></i> +1234567890</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 ببجي ستور</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy wallet address to clipboard
+        function copyWallet() {
+            const walletAddress = document.getElementById('wallet').innerText;
+            navigator.clipboard.writeText(walletAddress).then(() => {
+                alert('تم نسخ عنوان المحفظة: ' + walletAddress);
+            });
+        }
+        
+        // Form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const service = document.getElementById('service').value;
+            const email = document.getElementById('email').value;
+            const details = document.getElementById('details').value;
+            
+            if (!service || !email) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // In a real implementation, you would send this data to your server
+            alert('تم استلام طلبك بنجاح! سيتم التواصل معك على البريد الإلكتروني: ' + email);
+            document.getElementById('orderForm').reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 26, 46, 0.95)';
+            } else {
+                header.style.background = 'rgba(26, 26, 46, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
