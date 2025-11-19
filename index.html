@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام إدارة طلبات الخدمات</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,19 +12,9 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-        }
-        
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background: linear-gradient(135deg, #1a2a3a, #0d1b2a);
+            color: #fff;
             min-height: 100vh;
             padding: 20px;
         }
@@ -39,245 +28,44 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            color: var(--primary);
+            background: linear-gradient(90deg, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .subtitle {
             font-size: 1.2rem;
-            color: #666;
-        }
-        
-        .app-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .card h2 {
-            margin-bottom: 20px;
-            color: var(--primary);
-            font-size: 1.5rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--light);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #fff;
-            color: #333;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        button {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        button:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        button:disabled {
-            background: #95a5a6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .btn-success {
-            background: var(--success);
-        }
-        
-        .btn-success:hover {
-            background: #219653;
-        }
-        
-        .btn-danger {
-            background: var(--danger);
-        }
-        
-        .btn-danger:hover {
-            background: #c0392b;
-        }
-        
-        .orders-container {
-            margin-top: 30px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-        
-        .order-item {
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            background: #fff;
-            border-left: 5px solid var(--secondary);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-        
-        .order-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .order-id {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        
-        .order-status {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-completed {
-            background: #d1edff;
-            color: #0c5460;
-        }
-        
-        .status-paid {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .order-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .detail-label {
-            font-size: 0.8rem;
-            color: #777;
-            margin-bottom: 5px;
-        }
-        
-        .detail-value {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .order-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .order-actions button {
-            flex: 1;
-            padding: 8px 15px;
-            font-size: 0.9rem;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #777;
-        }
-        
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #bdc3c7;
+            color: #a5b4fc;
         }
         
         .tabs {
             display: flex;
             margin-bottom: 20px;
-            background: #fff;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 5px;
         }
         
         .tab {
             flex: 1;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
+            border-radius: 8px;
             transition: all 0.3s;
             font-weight: 600;
         }
         
         .tab.active {
-            background: var(--secondary);
+            background: #4361ee;
             color: white;
         }
         
@@ -289,19 +77,176 @@
             display: block;
         }
         
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h2 {
+            margin-bottom: 20px;
+            color: #4cc9f0;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
             margin-bottom: 20px;
         }
         
-        .stat-card {
-            background: #fff;
-            padding: 20px;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #a5b4fc;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
             border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px #4361ee;
+        }
+        
+        button {
+            background: linear-gradient(90deg, #4361ee, #3a0ca3);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .orders-list {
+            margin-top: 20px;
+        }
+        
+        .order-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4361ee;
+            transition: all 0.3s;
+        }
+        
+        .order-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .order-id {
+            font-weight: bold;
+            color: #4cc9f0;
+        }
+        
+        .order-date {
+            color: #a5b4fc;
+            font-size: 0.9rem;
+        }
+        
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: #a5b4fc;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            color: #ff9e00;
+        }
+        
+        .status-completed {
+            color: #4caf50;
+        }
+        
+        .status-cancelled {
+            color: #f44336;
+        }
+        
+        .file-upload {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: #4361ee;
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .file-upload i {
+            font-size: 2rem;
+            color: #a5b4fc;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
         }
         
         .stat-value {
@@ -312,26 +257,30 @@
         
         .stat-label {
             font-size: 0.9rem;
-            color: #777;
+            color: #a5b4fc;
         }
         
         .export-btn {
-            background: var(--success);
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
             width: auto;
-            margin-top: 20px;
+            margin-top: 15px;
+        }
+        
+        .hidden {
+            display: none;
         }
         
         @media (max-width: 768px) {
-            .app-container {
-                flex-direction: column;
-            }
-            
             .order-details {
                 grid-template-columns: 1fr;
             }
             
-            .order-actions {
+            .order-header {
                 flex-direction: column;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -343,83 +292,99 @@
             <p class="subtitle">تقديم الطلبات ومتابعتها وإدارتها بسهولة</p>
         </header>
         
-        <div class="app-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="order">تقديم طلب جديد</div>
+            <div class="tab" data-tab="orders">عرض الطلبات</div>
+            <div class="tab" data-tab="dashboard">لوحة التحكم</div>
+        </div>
+        
+        <!-- تقديم طلب جديد -->
+        <div class="tab-content active" id="order-tab">
             <div class="card">
-                <h2><i class="fas fa-plus-circle"></i> تقديم طلب جديد</h2>
-                
-                <div class="form-group">
-                    <label for="customerName">اسم العميل</label>
-                    <input type="text" id="customerName" placeholder="أدخل اسمك الكامل">
-                </div>
-                
-                <div class="form-group">
-                    <label for="customerEmail">البريد الإلكتروني</label>
-                    <input type="email" id="customerEmail" placeholder="example@email.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="serviceType">نوع الخدمة</label>
-                    <select id="serviceType">
-                        <option value="">اختر نوع الخدمة</option>
-                        <option value="بروكسي">خدمة بروكسي</option>
-                        <option value="رشق">خدمة رشق</option>
-                        <option value="تصميم">تصميم مواقع</option>
-                        <option value="برمجة">برمجة تطبيقات</option>
-                        <option value="تسويق">تسويق إلكتروني</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="package">الباقة المطلوبة</label>
-                    <select id="package">
-                        <option value="">اختر الباقة</option>
-                        <option value="أساسية">الباقة الأساسية - 10$</option>
-                        <option value="متوسطة">الباقة المتوسطة - 20$</option>
-                        <option value="متقدمة">الباقة المتقدمة - 35$</option>
-                        <option value="احترافية">الباقة الاحترافية - 50$</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="username">اسم المستخدم (لطلبات الرشق)</label>
-                    <input type="text" id="username" placeholder="اسم المستخدم المستهدف">
-                </div>
-                
-                <div class="form-group">
-                    <label for="paymentMethod">طريقة الدفع</label>
-                    <select id="paymentMethod">
-                        <option value="">اختر طريقة الدفع</option>
-                        <option value="شام كاش">شام كاش</option>
-                        <option value="بايبال">بايبال</option>
-                        <option value="تحويل بنكي">تحويل بنكي</option>
-                        <option value="كريبتو">عملات رقمية</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="paymentProof">إثبات الدفع (سكرين شوت)</label>
-                    <input type="file" id="paymentProof" accept="image/*">
-                </div>
-                
-                <div class="form-group">
-                    <label for="notes">ملاحظات إضافية</label>
-                    <textarea id="notes" rows="3" placeholder="أي ملاحظات إضافية حول الطلب..."></textarea>
-                </div>
-                
-                <button id="submitOrder" class="btn-success">
-                    <i class="fas fa-paper-plane"></i> تقديم الطلب
-                </button>
+                <h2>تقديم طلب خدمة جديد</h2>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="customerName">اسم العميل</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail">البريد الإلكتروني</label>
+                        <input type="email" id="customerEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceType">نوع الخدمة</label>
+                        <select id="serviceType" required>
+                            <option value="">اختر نوع الخدمة</option>
+                            <option value="بروكسي">خدمة بروكسي</option>
+                            <option value="رشق">خدمة رشق</option>
+                            <option value="شحن">خدمة شحن</option>
+                            <option value="أخرى">خدمة أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="usernameField" style="display: none;">
+                        <label for="targetUsername">اسم المستخدم المستهدف (لخدمة الرشق)</label>
+                        <input type="text" id="targetUsername">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="package">الباقة المطلوبة</label>
+                        <select id="package" required>
+                            <option value="">اختر الباقة</option>
+                            <option value="أساسية">الباقة الأساسية - 10$</option>
+                            <option value="متوسطة">الباقة المتوسطة - 20$</option>
+                            <option value="متقدمة">الباقة المتقدمة - 30$</option>
+                            <option value="مميزة">الباقة المميزة - 50$</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentMethod">طريقة الدفع</label>
+                        <select id="paymentMethod" required>
+                            <option value="">اختر طريقة الدفع</option>
+                            <option value="شام كاش">شام كاش</option>
+                            <option value="بايبال">بايبال</option>
+                            <option value="تحويل بنكي">تحويل بنكي</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>إثبات الدفع (سكرين شوت)</label>
+                        <div class="file-upload" id="fileUpload">
+                            <i>📁</i>
+                            <p>انقر لرفع صورة إثبات الدفع</p>
+                            <input type="file" id="paymentProof" accept="image/*" style="display: none;">
+                        </div>
+                        <div id="fileName" class="detail-value" style="margin-top: 10px;"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">ملاحظات إضافية</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit">تقديم الطلب</button>
+                </form>
             </div>
-            
+        </div>
+        
+        <!-- عرض الطلبات -->
+        <div class="tab-content" id="orders-tab">
             <div class="card">
-                <h2><i class="fas fa-tasks"></i> لوحة تحكم الطلبات</h2>
-                
-                <div class="tabs">
-                    <div class="tab active" data-tab="all">جميع الطلبات</div>
-                    <div class="tab" data-tab="pending">قيد الانتظار</div>
-                    <div class="tab" data-tab="paid">تم الدفع</div>
-                    <div class="tab" data-tab="completed">مكتملة</div>
+                <h2>جميع الطلبات</h2>
+                <div class="orders-list" id="ordersList">
+                    <!-- سيتم ملء الطلبات هنا بواسطة JavaScript -->
                 </div>
+            </div>
+        </div>
+        
+        <!-- لوحة التحكم -->
+        <div class="tab-content" id="dashboard-tab">
+            <div class="card">
+                <h2>لوحة التحكم والإحصائيات</h2>
                 
                 <div class="stats">
                     <div class="stat-card">
@@ -428,288 +393,276 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="pendingOrders">0</div>
-                        <div class="stat-label">قيد الانتظار</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="paidOrders">0</div>
-                        <div class="stat-label">تم الدفع</div>
+                        <div class="stat-label">طلبات قيد الانتظار</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="completedOrders">0</div>
-                        <div class="stat-label">مكتملة</div>
+                        <div class="stat-label">طلبات مكتملة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalRevenue">0$</div>
+                        <div class="stat-label">إجمالي الإيرادات</div>
                     </div>
                 </div>
                 
-                <div class="orders-container" id="ordersList">
-                    <!-- سيتم عرض الطلبات هنا ديناميكيًا -->
-                    <div class="empty-state">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>لا توجد طلبات حالياً</h3>
-                        <p>قم بتقديم طلب جديد لرؤيته هنا</p>
-                    </div>
-                </div>
-                
-                <button class="export-btn" id="exportData">
-                    <i class="fas fa-file-export"></i> تصدير البيانات لملف
-                </button>
+                <button class="export-btn" id="exportBtn">تصدير بيانات الطلبات</button>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // العناصر الرئيسية
-            const submitOrderBtn = document.getElementById('submitOrder');
-            const ordersList = document.getElementById('ordersList');
-            const exportDataBtn = document.getElementById('exportData');
+            // عناصر DOM
             const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const orderForm = document.getElementById('orderForm');
+            const ordersList = document.getElementById('ordersList');
+            const serviceType = document.getElementById('serviceType');
+            const usernameField = document.getElementById('usernameField');
+            const fileUpload = document.getElementById('fileUpload');
+            const paymentProof = document.getElementById('paymentProof');
+            const fileName = document.getElementById('fileName');
+            const exportBtn = document.getElementById('exportBtn');
             
-            // عناصر الإحصائيات
+            // إحصائيات لوحة التحكم
             const totalOrdersEl = document.getElementById('totalOrders');
             const pendingOrdersEl = document.getElementById('pendingOrders');
-            const paidOrdersEl = document.getElementById('paidOrders');
             const completedOrdersEl = document.getElementById('completedOrders');
+            const totalRevenueEl = document.getElementById('totalRevenue');
             
-            // بيانات التخزين
+            // بيانات التطبيق
             let orders = JSON.parse(localStorage.getItem('serviceOrders')) || [];
-            let currentFilter = 'all';
             
-            // تهيئة التطبيق
-            initApp();
-            
-            // أحداث المستخدم
-            submitOrderBtn.addEventListener('click', submitNewOrder);
-            exportDataBtn.addEventListener('click', exportOrdersToFile);
-            
+            // تبديل التبويبات
             tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // تحديث التبويب النشط
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
                     
-                    // تصفية الطلبات
-                    currentFilter = this.getAttribute('data-tab');
-                    displayOrders(currentFilter);
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-tab`) {
+                            content.classList.add('active');
+                        }
+                    });
+                    
+                    if (tabId === 'orders') {
+                        displayOrders();
+                    } else if (tabId === 'dashboard') {
+                        updateDashboard();
+                    }
                 });
             });
             
-            // وظائف التطبيق
-            function initApp() {
-                updateStats();
-                displayOrders(currentFilter);
-            }
+            // إظهار/إخفاء حقل اسم المستخدم لخدمة الرشق
+            serviceType.addEventListener('change', function() {
+                if (this.value === 'رشق') {
+                    usernameField.style.display = 'block';
+                } else {
+                    usernameField.style.display = 'none';
+                }
+            });
             
-            function submitNewOrder() {
-                // جمع بيانات النموذج
-                const customerName = document.getElementById('customerName').value;
-                const customerEmail = document.getElementById('customerEmail').value;
-                const serviceType = document.getElementById('serviceType').value;
-                const package = document.getElementById('package').value;
-                const username = document.getElementById('username').value;
-                const paymentMethod = document.getElementById('paymentMethod').value;
-                const paymentProof = document.getElementById('paymentProof').files[0];
-                const notes = document.getElementById('notes').value;
+            // رفع ملف إثبات الدفع
+            fileUpload.addEventListener('click', () => {
+                paymentProof.click();
+            });
+            
+            paymentProof.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileName.textContent = this.files[0].name;
+                } else {
+                    fileName.textContent = '';
+                }
+            });
+            
+            // تقديم طلب جديد
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // التحقق من البيانات المطلوبة
-                if (!customerName || !customerEmail || !serviceType || !package || !paymentMethod) {
-                    alert('يرجى ملء جميع الحقول المطلوبة');
+                const order = {
+                    id: generateOrderId(),
+                    date: new Date().toLocaleString('ar-SA'),
+                    customerName: document.getElementById('customerName').value,
+                    customerEmail: document.getElementById('customerEmail').value,
+                    serviceType: document.getElementById('serviceType').value,
+                    targetUsername: document.getElementById('targetUsername').value,
+                    package: document.getElementById('package').value,
+                    paymentMethod: document.getElementById('paymentMethod').value,
+                    paymentProof: paymentProof.files.length > 0 ? paymentProof.files[0].name : 'لم يتم الرفع',
+                    notes: document.getElementById('notes').value,
+                    status: 'pending',
+                    price: getPackagePrice(document.getElementById('package').value)
+                };
+                
+                orders.push(order);
+                saveOrders();
+                
+                alert('تم تقديم طلبك بنجاح! رقم الطلب: ' + order.id);
+                orderForm.reset();
+                fileName.textContent = '';
+                
+                // الانتقال إلى تبويب الطلبات
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                document.querySelector('.tab[data-tab="orders"]').classList.add('active');
+                document.getElementById('orders-tab').classList.add('active');
+                
+                displayOrders();
+            });
+            
+            // عرض الطلبات
+            function displayOrders() {
+                if (orders.length === 0) {
+                    ordersList.innerHTML = '<div class="order-item">لا توجد طلبات لعرضها</div>';
                     return;
                 }
                 
-                // إنشاء طلب جديد
-                const newOrder = {
-                    id: generateOrderId(),
-                    customerName,
-                    customerEmail,
-                    serviceType,
-                    package,
-                    username: username || 'غير محدد',
-                    paymentMethod,
-                    paymentProof: paymentProof ? paymentProof.name : 'لم يتم رفع ملف',
-                    notes: notes || 'لا توجد ملاحظات',
-                    status: 'pending',
-                    date: new Date().toLocaleString('ar-EG')
-                };
+                ordersList.innerHTML = '';
                 
-                // إضافة الطلب إلى القائمة
-                orders.unshift(newOrder);
-                saveOrders();
-                updateStats();
-                displayOrders(currentFilter);
-                
-                // إظهار رسالة نجاح
-                alert('تم تقديم الطلب بنجاح! رقم الطلب: ' + newOrder.id);
-                
-                // إعادة تعيين النموذج
-                resetForm();
+                orders.forEach(order => {
+                    const orderItem = document.createElement('div');
+                    orderItem.className = 'order-item';
+                    
+                    orderItem.innerHTML = `
+                        <div class="order-header">
+                            <div class="order-id">طلب #${order.id}</div>
+                            <div class="order-date">${order.date}</div>
+                        </div>
+                        <div class="order-status ${getStatusClass(order.status)}">${getStatusText(order.status)}</div>
+                        <div class="order-details">
+                            <div class="detail-item">
+                                <div class="detail-label">اسم العميل</div>
+                                <div class="detail-value">${order.customerName}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">البريد الإلكتروني</div>
+                                <div class="detail-value">${order.customerEmail}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">نوع الخدمة</div>
+                                <div class="detail-value">${order.serviceType}</div>
+                            </div>
+                            ${order.serviceType === 'رشق' ? `
+                            <div class="detail-item">
+                                <div class="detail-label">اسم المستخدم المستهدف</div>
+                                <div class="detail-value">${order.targetUsername}</div>
+                            </div>
+                            ` : ''}
+                            <div class="detail-item">
+                                <div class="detail-label">الباقة</div>
+                                <div class="detail-value">${order.package}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">طريقة الدفع</div>
+                                <div class="detail-value">${order.paymentMethod}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">إثبات الدفع</div>
+                                <div class="detail-value">${order.paymentProof}</div>
+                            </div>
+                            ${order.notes ? `
+                            <div class="detail-item">
+                                <div class="detail-label">ملاحظات</div>
+                                <div class="detail-value">${order.notes}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                        <div style="margin-top: 15px; display: flex; gap: 10px;">
+                            <button onclick="changeOrderStatus('${order.id}', 'completed')" class="complete-btn" style="background: #4caf50; width: auto; padding: 8px 15px;">تم الإكمال</button>
+                            <button onclick="changeOrderStatus('${order.id}', 'cancelled')" class="cancel-btn" style="background: #f44336; width: auto; padding: 8px 15px;">إلغاء</button>
+                        </div>
+                    `;
+                    
+                    ordersList.appendChild(orderItem);
+                });
             }
             
+            // تحديث لوحة التحكم
+            function updateDashboard() {
+                totalOrdersEl.textContent = orders.length;
+                
+                const pendingOrders = orders.filter(order => order.status === 'pending').length;
+                const completedOrders = orders.filter(order => order.status === 'completed').length;
+                
+                pendingOrdersEl.textContent = pendingOrders;
+                completedOrdersEl.textContent = completedOrders;
+                
+                const totalRevenue = orders.reduce((sum, order) => {
+                    return sum + (order.price || 0);
+                }, 0);
+                
+                totalRevenueEl.textContent = totalRevenue + '$';
+            }
+            
+            // تصدير بيانات الطلبات
+            exportBtn.addEventListener('click', function() {
+                const dataStr = JSON.stringify(orders, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(dataBlob);
+                link.download = 'service_orders.json';
+                link.click();
+            });
+            
+            // وظائف مساعدة
             function generateOrderId() {
-                return 'ORD-' + Date.now().toString().substr(-6);
+                return 'ORD' + Date.now().toString().substr(-6);
+            }
+            
+            function getPackagePrice(packageName) {
+                const prices = {
+                    'أساسية': 10,
+                    'متوسطة': 20,
+                    'متقدمة': 30,
+                    'مميزة': 50
+                };
+                
+                return prices[packageName] || 0;
+            }
+            
+            function getStatusClass(status) {
+                const classes = {
+                    'pending': 'status-pending',
+                    'completed': 'status-completed',
+                    'cancelled': 'status-cancelled'
+                };
+                
+                return classes[status] || '';
+            }
+            
+            function getStatusText(status) {
+                const texts = {
+                    'pending': 'قيد الانتظار',
+                    'completed': 'مكتمل',
+                    'cancelled': 'ملغى'
+                };
+                
+                return texts[status] || status;
             }
             
             function saveOrders() {
                 localStorage.setItem('serviceOrders', JSON.stringify(orders));
             }
             
-            function updateStats() {
-                const total = orders.length;
-                const pending = orders.filter(order => order.status === 'pending').length;
-                const paid = orders.filter(order => order.status === 'paid').length;
-                const completed = orders.filter(order => order.status === 'completed').length;
-                
-                totalOrdersEl.textContent = total;
-                pendingOrdersEl.textContent = pending;
-                paidOrdersEl.textContent = paid;
-                completedOrdersEl.textContent = completed;
-            }
-            
-            function displayOrders(filter = 'all') {
-                let filteredOrders = orders;
-                
-                if (filter !== 'all') {
-                    filteredOrders = orders.filter(order => order.status === filter);
-                }
-                
-                if (filteredOrders.length === 0) {
-                    ordersList.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-clipboard-list"></i>
-                            <h3>لا توجد طلبات</h3>
-                            <p>${filter === 'all' ? 'قم بتقديم طلب جديد لرؤيته هنا' : 'لا توجد طلبات في هذه الفئة'}</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                ordersList.innerHTML = '';
-                
-                filteredOrders.forEach(order => {
-                    const orderElement = document.createElement('div');
-                    orderElement.className = 'order-item';
-                    orderElement.innerHTML = `
-                        <div class="order-header">
-                            <div class="order-id">طلب #${order.id}</div>
-                            <div class="order-status status-${order.status}">${getStatusText(order.status)}</div>
-                        </div>
-                        <div class="order-details">
-                            <div class="detail-item">
-                                <span class="detail-label">العميل</span>
-                                <span class="detail-value">${order.customerName}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">البريد الإلكتروني</span>
-                                <span class="detail-value">${order.customerEmail}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">نوع الخدمة</span>
-                                <span class="detail-value">${order.serviceType}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">الباقة</span>
-                                <span class="detail-value">${order.package}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">اسم المستخدم</span>
-                                <span class="detail-value">${order.username}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">طريقة الدفع</span>
-                                <span class="detail-value">${order.paymentMethod}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">إثبات الدفع</span>
-                                <span class="detail-value">${order.paymentProof}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">التاريخ</span>
-                                <span class="detail-value">${order.date}</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">ملاحظات</span>
-                            <span class="detail-value">${order.notes}</span>
-                        </div>
-                        <div class="order-actions">
-                            ${order.status === 'pending' ? `
-                                <button class="btn-success" onclick="updateOrderStatus('${order.id}', 'paid')">
-                                    <i class="fas fa-check-circle"></i> تأكيد الدفع
-                                </button>
-                            ` : ''}
-                            ${order.status === 'paid' ? `
-                                <button class="btn-success" onclick="updateOrderStatus('${order.id}', 'completed')">
-                                    <i class="fas fa-check-double"></i> تأكيد الإنجاز
-                                </button>
-                            ` : ''}
-                            <button class="btn-danger" onclick="deleteOrder('${order.id}')">
-                                <i class="fas fa-trash"></i> حذف
-                            </button>
-                        </div>
-                    `;
-                    ordersList.appendChild(orderElement);
-                });
-            }
-            
-            function getStatusText(status) {
-                const statusMap = {
-                    'pending': 'قيد الانتظار',
-                    'paid': 'تم الدفع',
-                    'completed': 'مكتمل'
-                };
-                return statusMap[status] || status;
-            }
-            
-            function resetForm() {
-                document.getElementById('customerName').value = '';
-                document.getElementById('customerEmail').value = '';
-                document.getElementById('serviceType').value = '';
-                document.getElementById('package').value = '';
-                document.getElementById('username').value = '';
-                document.getElementById('paymentMethod').value = '';
-                document.getElementById('paymentProof').value = '';
-                document.getElementById('notes').value = '';
-            }
-            
-            function exportOrdersToFile() {
-                if (orders.length === 0) {
-                    alert('لا توجد طلبات لتصديرها');
-                    return;
-                }
-                
-                const dataStr = JSON.stringify(orders, null, 2);
-                const dataBlob = new Blob([dataStr], {type: 'application/json'});
-                
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(dataBlob);
-                link.download = `service_orders_${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                
-                alert('تم تصدير بيانات الطلبات بنجاح!');
-            }
-            
-            // جعل الدوال متاحة عالمياً لاستخدامها في الأحداث
-            window.updateOrderStatus = function(orderId, newStatus) {
+            // جعل الدوال متاحة عالمياً
+            window.changeOrderStatus = function(orderId, newStatus) {
                 const orderIndex = orders.findIndex(order => order.id === orderId);
                 if (orderIndex !== -1) {
                     orders[orderIndex].status = newStatus;
                     saveOrders();
-                    updateStats();
-                    displayOrders(currentFilter);
-                    
-                    alert('تم تحديث حالة الطلب بنجاح!');
+                    displayOrders();
+                    updateDashboard();
                 }
             };
             
-            window.deleteOrder = function(orderId) {
-                if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-                    orders = orders.filter(order => order.id !== orderId);
-                    saveOrders();
-                    updateStats();
-                    displayOrders(currentFilter);
-                    
-                    alert('تم حذف الطلب بنجاح!');
-                }
-            };
+            // التهيئة الأولية
+            displayOrders();
+            updateDashboard();
         });
     </script>
 </body>
